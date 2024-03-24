@@ -1,16 +1,16 @@
-# assessment
+# Sales Report Assessment
 
-A new Flutter project.
+This Flutter-based application, along with its backend, provides a comprehensive solution for visualizing sales reports.
+The fontend is mae by flutter and The backend is powered by Node.js, Express.js, and MongoDB, and the entire backend is hosted on Render.
 
-## Getting Started
+## Technologies Used
 
-This project is a starting point for a Flutter application.
+- Flutter: Frontend framework for building cross-platform mobile applications.
+- Syncfusion: Package for creating stunning visualizations, including bar graphs.
+- Provider: State management package for Flutter applications.
+- Shared Preferences: Flutter package for persistent key-value storage.
+- Node.js: JavaScript runtime for building scalable server-side applications.
+- Express.js: Fast, unopinionated, minimalist web framework for Node.js.
+- MongoDB: NoSQL database for efficient storage and retrieval of data.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
