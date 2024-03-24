@@ -86,11 +86,11 @@ class DashBoardScreen extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color:
-                                  Colors.grey.withOpacity(0.5), // shadow color
-                              spreadRadius: 0.5, // spread radius
-                              blurRadius: 2, // blur radius
+                                  Colors.grey.withOpacity(0.5), 
+                              spreadRadius: 0.5, 
+                              blurRadius: 2, 
                               offset: const Offset(
-                                  0, 3), // changes position of shadow
+                                  0, 3), 
                             ),
                           ],
                         ),
@@ -118,7 +118,7 @@ class DashBoardScreen extends StatelessWidget {
                                           formattedDate, const TextStyle());
                                     }
                                   }
-                                  // Return the original value as a label if it cannot be parsed or formatted
+                                 
                                   return ChartAxisLabel(
                                       value.toString(), const TextStyle());
                                 },

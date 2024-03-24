@@ -36,10 +36,10 @@ class CustomDashboardTile extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // shadow color
-                  spreadRadius: 0.5, // spread radius
-                  blurRadius: 2, // blur radius
-                  offset: const Offset(0, 3), // changes position of shadow
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 0.5,
+                  blurRadius: 2,
+                  offset: const Offset(0, 3),
                 ),
               ],
               color: Colors.white,
@@ -61,7 +61,7 @@ class CustomDashboardTile extends StatelessWidget {
                   ),
                   Text(
                     value1,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                     ),
                   ),
@@ -76,10 +76,10 @@ class CustomDashboardTile extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5), // shadow color
-                spreadRadius: 0.5, // spread radius
-                blurRadius: 2, // blur radius
-                offset: const Offset(0, 3), // changes position of shadow
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 0.5,
+                blurRadius: 2,
+                offset: const Offset(0, 3),
               ),
             ],
             color: Colors.white,
@@ -101,7 +101,7 @@ class CustomDashboardTile extends StatelessWidget {
                 ),
                 Text(
                   value2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 30,
                   ),
                 ),

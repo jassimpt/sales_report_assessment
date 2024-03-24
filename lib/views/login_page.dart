@@ -1,13 +1,14 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/views/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key});
+  LoginPage({
+    super.key,
+  });
 
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

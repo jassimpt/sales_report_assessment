@@ -1,5 +1,5 @@
 import 'package:assessment/controllers/data_provider.dart';
-import 'package:assessment/views/login_page.dart';
+
 import 'package:assessment/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

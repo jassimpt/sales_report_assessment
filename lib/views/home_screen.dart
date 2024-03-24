@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
             text1: "Sales report",
             text2: "Day closing report",
             onTap1: () {},
-            onTap2: () {},
+            onTap2: () {},  
           ),
         ],
       ),

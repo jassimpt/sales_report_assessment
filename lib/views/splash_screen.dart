@@ -17,7 +17,6 @@ class _SplashscreenState extends State<Splashscreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     timer = Timer(const Duration(seconds: 3), () {
       checkLogin();
@@ -26,7 +25,6 @@ class _SplashscreenState extends State<Splashscreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     timer;
   }
@@ -63,7 +61,7 @@ class _SplashscreenState extends State<Splashscreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ));
     } else {
       Navigator.pushReplacement(
