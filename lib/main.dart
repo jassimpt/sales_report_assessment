@@ -1,5 +1,4 @@
 import 'package:assessment/controllers/data_provider.dart';
-
 import 'package:assessment/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
           create: (context) => DataProvider(),
         )
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Splashscreen(),
       ),

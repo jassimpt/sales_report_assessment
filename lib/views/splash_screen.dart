@@ -1,8 +1,10 @@
 import 'dart:async';
-
+import 'package:assessment/controllers/data_provider.dart';
+import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/home_screen.dart';
-import 'package:assessment/views/login_page.dart';
+import 'package:assessment/views/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -33,22 +35,11 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                "assets/images/mite_solutions_white.png",
-                height: size.height * 0.17,
-              ),
-              Image.asset(
-                "assets/images/saloon_logo.png",
-                height: size.height * 0.3,
-              )
-            ],
-          ),
+      backgroundColor: splashBackgroundColor,
+      body: Center(
+        child: Image.asset(
+          "assets/images/mite_solutions_white.png",
+          height: size.height * 0.15,
         ),
       ),
     );
@@ -56,8 +47,11 @@ class _SplashscreenState extends State<Splashscreen> {
 
   void checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final pro = Provider.of<DataProvider>(context, listen: false);
     bool isLogged = prefs.getBool("isLogged") ?? false;
     if (isLogged) {
+      pro.token = prefs.getString("token");
+      print(pro.token);
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -67,7 +61,7 @@ class _SplashscreenState extends State<Splashscreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginPage(),
+            builder: (context) => LoginScreen(),
           ));
     }
   }

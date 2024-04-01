@@ -1,6 +1,8 @@
 import 'package:assessment/controllers/data_provider.dart';
+import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/dashboard_screen.dart';
-import 'package:assessment/views/login_page.dart';
+import 'package:assessment/views/login_screen.dart';
+import 'package:assessment/views/profile_screen.dart';
 import 'package:assessment/views/widgets/custom_tile_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: splashBackgroundColor,
         automaticallyImplyLeading: false,
         title: const Center(
             child: Text(
@@ -49,7 +51,14 @@ class HomeScreen extends StatelessWidget {
                     builder: (context) => const DashBoardScreen(),
                   ));
             },
-            onTap2: () {},
+            onTap2: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
           ),
           CustomTileRow(
             size: size,
@@ -76,7 +85,7 @@ class HomeScreen extends StatelessWidget {
             text1: "Sales report",
             text2: "Day closing report",
             onTap1: () {},
-            onTap2: () {},  
+            onTap2: () {},
           ),
         ],
       ),
@@ -89,7 +98,7 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginPage(),
+          builder: (context) => LoginScreen(),
         ));
   }
 }

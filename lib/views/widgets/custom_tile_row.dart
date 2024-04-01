@@ -1,3 +1,4 @@
+import 'package:assessment/helpers/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTileRow extends StatelessWidget {
@@ -31,7 +32,7 @@ class CustomTileRow extends StatelessWidget {
               width: size.width * 0.45,
               height: size.height * 0.15,
               decoration: const BoxDecoration(
-                  color: Colors.blue,
+                  color: splashBackgroundColor,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Center(
                 child: Column(
@@ -60,7 +61,7 @@ class CustomTileRow extends StatelessWidget {
               width: size.width * 0.45,
               height: size.height * 0.15,
               decoration: const BoxDecoration(
-                  color: Colors.blue,
+                  color: splashBackgroundColor,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Center(
                 child: Column(
