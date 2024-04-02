@@ -35,7 +35,7 @@ class MonthlyTotalsWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomDashboardTile(
-                  title1: "Total Sales Amt.",
+                  title1: "Total Service Amt.",
                   title2: "Total Sales Amount",
                   value1: data.totalServiceAmount.toString(),
                   value2: data.totalSalesAmount.toString(),

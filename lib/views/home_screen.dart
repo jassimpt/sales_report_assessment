@@ -1,8 +1,10 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/dashboard_screen.dart';
+import 'package:assessment/views/day_closing_screening.dart';
 import 'package:assessment/views/login_screen.dart';
 import 'package:assessment/views/profile_screen.dart';
+import 'package:assessment/views/sales_products_and_services_screen.dart';
 import 'package:assessment/views/widgets/custom_tile_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,8 +68,18 @@ class HomeScreen extends StatelessWidget {
             icon2: Icons.add_shopping_cart_outlined,
             text1: "Day closing",
             text2: "Sales-products & services",
-            onTap1: () {},
-            onTap2: () {},
+            onTap1: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DayClosingScreen(),
+              ));
+            },
+            onTap2: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SalesProductsAndServicesScreen(),
+                  ));
+            },
           ),
           CustomTileRow(
             size: size,
