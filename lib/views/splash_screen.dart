@@ -3,6 +3,7 @@ import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/home_screen.dart';
 import 'package:assessment/views/login_screen.dart';
+import 'package:assessment/views/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,7 +56,7 @@ class _SplashscreenState extends State<Splashscreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => BottomNav(),
           ));
     } else {
       Navigator.pushReplacement(

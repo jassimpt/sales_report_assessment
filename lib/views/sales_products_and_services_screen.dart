@@ -1,36 +1,45 @@
+import 'package:assessment/controllers/basic_controller.dart';
+import 'package:assessment/views/widgets/custom_submit_button.dart';
+import 'package:assessment/views/widgets/product_dialogue_box.dart';
+import 'package:assessment/views/widgets/table_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:assessment/views/widgets/day_closing_data_field.dart';
 import 'package:assessment/views/widgets/day_closing_data_head.dart';
 import 'package:assessment/views/widgets/employee_tile_head.dart';
 import 'package:assessment/helpers/colors.dart';
+import 'package:provider/provider.dart';
 
-class SalesProductsAndServicesScreen extends StatefulWidget {
-  SalesProductsAndServicesScreen({Key? key}) : super(key: key);
+class SalesProductsAndServicesScreen extends StatelessWidget {
+  SalesProductsAndServicesScreen({super.key});
 
-  @override
-  _SalesProductsAndServicesScreenState createState() =>
-      _SalesProductsAndServicesScreenState();
-}
-
-class _SalesProductsAndServicesScreenState
-    extends State<SalesProductsAndServicesScreen> {
   final TextEditingController dateController = TextEditingController();
-  List<Widget> rows = [];
-
-  final List<String> dropdownItems = ['Item 1', 'Item 2', 'Item 3'];
-  final Map<String, double> itemAmounts = {
-    'Item 1': 10.0,
-    'Item 2': 20.0,
-    'Item 3': 30.0,
-  };
-
-  String selectedItem = 'Item 1';
-  double selectedAmount = 10.0;
+  final TextEditingController qtyController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController itemTotalController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: splashBackgroundColor,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return ProductDialogueBox(
+                amountController: amountController,
+                qtyController: qtyController,
+              );
+            },
+          );
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: splashBackgroundColor,
@@ -73,158 +82,179 @@ class _SalesProductsAndServicesScreenState
                     ),
                   ],
                 ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Select Items",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Container(
-                          width: size.width * 0.22,
-                          height: size.height * 0.05,
-                          decoration:
-                              const BoxDecoration(color: splashBackgroundColor),
-                          child: const Center(
-                            child: Text(
-                              "Particular",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      TableHeading(
+                        size: size,
+                        text: "Particular",
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Container(
-                          width: size.width * 0.22,
-                          height: size.height * 0.05,
-                          decoration:
-                              const BoxDecoration(color: splashBackgroundColor),
-                          child: const Center(
-                            child: Text(
-                              "Qty",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      TableHeading(
+                        size: size,
+                        text: "Qty",
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Container(
-                          width: size.width * 0.22,
-                          height: size.height * 0.05,
-                          decoration:
-                              const BoxDecoration(color: splashBackgroundColor),
-                          child: const Center(
-                            child: Text(
-                              "Amount",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      TableHeading(
+                        size: size,
+                        text: "Amount",
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Container(
-                          width: size.width * 0.22,
-                          height: size.height * 0.05,
-                          decoration:
-                              const BoxDecoration(color: splashBackgroundColor),
-                          child: const Center(
-                            child: Text(
-                              "Action",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      TableHeading(
+                        size: size,
+                        text: "Action",
                       ),
                     ],
                   ),
                 ),
-                ...rows,
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      rows.add(buildRow(size));
-                    });
-                  },
-                  child: Text("Add item"),
+                Consumer<BasicController>(
+                  builder: (context, value, child) => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: value.productsList.length,
+                    itemBuilder: (context, index) {
+                      final productHistory = value.productsList[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                productHistory.particular!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productHistory.qty.toString(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productHistory.amount.toString(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.delete))
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                SizedBox(height: 10),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Select Services",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Row(
+                    children: [
+                      TableHeading(
+                        size: size,
+                        text: "Particular",
+                      ),
+                      TableHeading(
+                        size: size,
+                        text: "Qty",
+                      ),
+                      TableHeading(
+                        size: size,
+                        text: "Amount",
+                      ),
+                      TableHeading(
+                        size: size,
+                        text: "Action",
+                      ),
+                    ],
+                  ),
+                ),
+                Consumer<BasicController>(
+                  builder: (context, value, child) => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: value.serviceList.length,
+                    itemBuilder: (context, index) {
+                      final productHistory = value.serviceList[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                productHistory.particular!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productHistory.qty.toString(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                productHistory.amount.toString(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.delete),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                DayClosingDataHead(text: "Item total:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                DayClosingDataHead(text: "Service total:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                DayClosingDataHead(text: "Total Amount:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                DayClosingDataHead(text: "Sub total:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                DayClosingDataHead(text: "Discount total:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                DayClosingDataHead(text: "Payment Method:"),
+                DayClosingDataField(
+                    fillColor: textFieldFill,
+                    readOnly: true,
+                    controller: itemTotalController),
+                CustomSubmitButton(
+                  name: "Submit",
+                  onPressed: () {},
+                )
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildRow(Size size) {
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              height: size.height * 0.06,
-              child: DropdownButton<String>(
-                value: selectedItem,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedItem = newValue!;
-
-                    selectedAmount = itemAmounts[selectedItem]!;
-                  });
-                },
-                items:
-                    dropdownItems.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-          SizedBox(width: 5),
-          Expanded(
-            child: Container(
-              height: size.height * 0.06,
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: textFieldFill,
-                  hintText: 'Qty',
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 5),
-          Expanded(
-            child: Container(
-              height: size.height * 0.06,
-              child: Text(selectedAmount.toString()), // Show selected amount
-            ),
-          ),
-          SizedBox(width: 5),
-          Expanded(
-            child: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                setState(() {
-                  rows.removeLast();
-                });
-              },
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,65 +1,59 @@
 import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/model/data_model.dart';
 import 'package:assessment/views/widgets/custom_dashboard_tile.dart';
-import 'package:assessment/views/widgets/employee_tile_head.dart';
+import 'package:assessment/views/widgets/main_container.dart';
+import 'package:assessment/views/widgets/tile_heading.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MonthlyTotalsWidget extends StatelessWidget {
-  const MonthlyTotalsWidget({super.key, required this.data});
+  const MonthlyTotalsWidget(
+      {super.key, required this.data, required this.size});
 
+  final Size size;
   final DataModel data;
-
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: tileBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0.5,
-              blurRadius: 2,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+    return MainContainer(
+      size: size,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 30),
         child: Column(
           children: [
-            EmployeeTileHeading(size: size, heading: "Monthly Totals"),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomDashboardTile(
-                  title1: "Total Service Amt.",
-                  title2: "Total Sales Amount",
-                  value1: data.totalServiceAmount.toString(),
-                  value2: data.totalSalesAmount.toString(),
-                  size: size,
-                  height1: size.height * 0.15,
-                  width1: size.width * 0.45,
-                  height2: size.height * 0.15,
-                  width2: size.width * 0.45,
-                ),
-                CustomDashboardTile(
-                  title1: "Commission Earned",
-                  title2: "Advance Taken",
-                  value1: data.commissionEarned.toString(),
-                  value2: data.advanceTaken.toString(),
-                  size: size,
-                  height1: size.height * 0.13,
-                  width1: size.width * 0.43,
-                  height2: size.height * 0.13,
-                  width2: size.width * 0.41,
-                ),
-              ],
-            ),
+            TileHeading(text1: "Monthly", text2: "Totals"),
             SizedBox(
               height: size.height * 0.02,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomDashboardTile(
+                  title1: "Total Services",
+                  title2: "Total Sales",
+                  value1: data.totalServiceAmount.toString(),
+                  value2: data.totalSalesAmount.toString(),
+                  color1: buttonColor1,
+                  color2: Colors.blue.shade400,
+                  size: size,
+                  height1: size.height * 0.13,
+                  width1: size.width * 0.35,
+                  height2: size.height * 0.13,
+                  width2: size.width * 0.35,
+                ),
+                CustomDashboardTile(
+                  title1: "Total Advance",
+                  title2: "Commision Recieved",
+                  value1: data.advanceTaken.toString(),
+                  value2: data.commissionEarned.toString(),
+                  color1: Colors.amber.shade400,
+                  color2: tileColor,
+                  size: size,
+                  height1: size.height * 0.13,
+                  width1: size.width * 0.35,
+                  height2: size.height * 0.13,
+                  width2: size.width * 0.35,
+                ),
+              ],
             )
           ],
         ),

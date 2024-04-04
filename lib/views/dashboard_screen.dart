@@ -1,6 +1,6 @@
 import 'package:assessment/controllers/data_provider.dart';
-import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/model/data_model.dart';
+import 'package:assessment/views/widgets/custom_app_bar.dart';
 import 'package:assessment/views/widgets/monthly_totals_widget.dart';
 import 'package:assessment/views/widgets/statistics_chart.dart';
 import 'package:flutter/material.dart';
@@ -13,28 +13,18 @@ class DashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: splashBackgroundColor,
-        title: const Center(
-          child: Text(
-            "Dashboard",
-            style: TextStyle(color: Colors.white),
-          ),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(size.height * 0.08), // Set your preferred height
+        child: CustomAppBar(
+          size: size,
+          text: "Dashboard",
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 100),
           child: Consumer<DataProvider>(
             builder: (context, value, child) => FutureBuilder<DataModel>(
               future: value.fetchData(),
@@ -46,12 +36,12 @@ class DashBoardScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MonthlyTotalsWidget(data: data),
-                      SizedBox(
-                        height: size.height * 0.02,
+                      MonthlyTotalsWidget(
+                        data: data,
+                        size: size,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(20),
                         child: StatisticsChart(data: data),
                       ),
                     ],

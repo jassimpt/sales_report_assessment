@@ -1,8 +1,11 @@
 import 'package:assessment/helpers/colors.dart';
-import 'package:assessment/views/widgets/day_closing_data_field.dart';
+import 'package:assessment/views/widgets/custom_app_bar.dart';
 import 'package:assessment/views/widgets/day_closing_data_head.dart';
-import 'package:assessment/views/widgets/employee_tile_head.dart';
+import 'package:assessment/views/widgets/employee_details_row.dart';
+import 'package:assessment/views/widgets/main_container.dart';
+import 'package:assessment/views/widgets/tile_heading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class DayClosingScreen extends StatelessWidget {
   DayClosingScreen({super.key});
@@ -24,115 +27,132 @@ class DayClosingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: splashBackgroundColor,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          "Day Closing",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(size.height * 0.08), // Set your preferred height
+          child: CustomAppBar(size: size, text: "Day Closing")),
       body: SingleChildScrollView(
+          child: MainContainer(
+        size: size,
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            width: size.width,
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 0.5,
-                    blurRadius: 2,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(10),
-                color: tileBackgroundColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                EmployeeTileHeading(
-                    size: size, heading: "Day Closing by Employee"),
-                const DayClosingDataHead(
-                  text: "Date:",
-                ),
-                DayClosingDataField(
-                  controller: dateController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                const DayClosingDataHead(
-                  text: "Employee:",
-                ),
-                DayClosingDataField(
-                  controller: employeeController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                const DayClosingDataHead(
-                  text: "Total Service:",
-                ),
-                DayClosingDataField(
-                  controller: totalServiceController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                const DayClosingDataHead(
-                  text: "Total Sales:",
-                ),
-                DayClosingDataField(
-                  controller: totalSalesController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                const DayClosingDataHead(
-                  text: "Total Collection:",
-                ),
-                DayClosingDataField(
-                  controller: totalCollectionController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                const DayClosingDataHead(
-                  text: "Advance:",
-                ),
-                DayClosingDataField(
-                  controller: advanceController,
-                  fillColor: Colors.white,
-                  readOnly: false,
-                ),
-                const DayClosingDataHead(
-                  text: "Net Collection:",
-                ),
-                DayClosingDataField(
-                  controller: netCollectionController,
-                  fillColor: textFieldFill,
-                  readOnly: true,
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: ElevatedButton(
-                      style: const ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)))),
-                          backgroundColor:
-                              MaterialStatePropertyAll(buttonColor1)),
-                      onPressed: () {},
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TileHeading(text1: "Day Closing by", text2: "Staff"),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              Row(
+                children: [
+                  const DayClosingDataHead(text: "Date:"),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: size.height * 0.06,
+                        child: TextFormField(
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            labelText: "Date",
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.withOpacity(0),
+                                ),
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.5),
+                    ),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  children: [
+                    const EmployeeDetailsRow(
+                      bordered: false,
+                      empData: "Thomas naz weaver",
+                      head: "Employee",
+                    ),
+                    const EmployeeDetailsRow(
+                      bordered: false,
+                      empData: "0",
+                      head: "Total Service",
+                    ),
+                    const EmployeeDetailsRow(
+                      bordered: false,
+                      empData: "0",
+                      head: "Total Sales",
+                    ),
+                    const EmployeeDetailsRow(
+                      bordered: false,
+                      empData: "0",
+                      head: "Total Collection",
+                    ),
+                    const EmployeeDetailsRow(
+                      bordered: false,
+                      empData: "0",
+                      head: "Net Collection",
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: Row(
+                        children: [
+                          const DayClosingDataHead(text: "Advance:"),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: size.height * 0.06,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: "Advance",
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.withOpacity(0),
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
+                child: SizedBox(
+                  width: size.width,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                      backgroundColor:
+                          const MaterialStatePropertyAll(buttonColor1),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      "Submit",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

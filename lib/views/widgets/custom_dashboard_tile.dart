@@ -8,6 +8,8 @@ class CustomDashboardTile extends StatelessWidget {
       required this.title2,
       required this.value1,
       required this.value2,
+      required this.color1,
+      required this.color2,
       required this.size,
       required this.height1,
       required this.width1,
@@ -23,6 +25,8 @@ class CustomDashboardTile extends StatelessWidget {
   final String title2;
   final String value1;
   final String value2;
+  final Color? color1;
+  final Color? color2;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class CustomDashboardTile extends StatelessWidget {
                   offset: const Offset(0, 3),
                 ),
               ],
-              color: Colors.white,
+              color: color1,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -53,22 +57,24 @@ class CustomDashboardTile extends StatelessWidget {
                   Text(
                     title1,
                     style: GoogleFonts.montserrat(
-                      fontSize: 15,
-                    ),
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: size.height * 0.01,
                   ),
                   Text(
                     value1,
-                    style: const TextStyle(
-                      fontSize: 30,
-                    ),
+                    style: const TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
+        ),
+        SizedBox(
+          height: size.height * 0.01,
         ),
         Container(
           height: height2,
@@ -82,7 +88,7 @@ class CustomDashboardTile extends StatelessWidget {
                 offset: const Offset(0, 3),
               ),
             ],
-            color: Colors.white,
+            color: color2,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -93,17 +99,16 @@ class CustomDashboardTile extends StatelessWidget {
                 Text(
                   title2,
                   style: GoogleFonts.montserrat(
-                    fontSize: 15,
-                  ),
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: size.height * 0.01,
                 ),
                 Text(
                   value2,
-                  style: const TextStyle(
-                    fontSize: 30,
-                  ),
+                  style: const TextStyle(fontSize: 25, color: Colors.white),
                 ),
               ],
             ),

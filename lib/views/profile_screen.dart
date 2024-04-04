@@ -1,8 +1,9 @@
 import 'package:assessment/helpers/colors.dart';
+import 'package:assessment/views/widgets/custom_app_bar.dart';
 import 'package:assessment/views/widgets/employee_details_row.dart';
-import 'package:assessment/views/widgets/employee_tile_head.dart';
+import 'package:assessment/views/widgets/main_container.dart';
+import 'package:assessment/views/widgets/tile_heading.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -10,134 +11,177 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: splashBackgroundColor,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: Text(
-          "Profile",
-          style: GoogleFonts.urbanist(
-              color: Colors.white, fontWeight: FontWeight.bold),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(size.height * 0.08), // Set your preferred height
+          child: CustomAppBar(size: size, text: "Profile"),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 0.5,
-                      blurRadius: 2,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              PreferredSize(
+                preferredSize: Size.fromHeight(40),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  color: tileBackgroundColor,
-                ),
-                child: Column(
-                  children: [
-                    EmployeeTileHeading(
-                        size: size, heading: "Employee Details"),
-                    const EmployeeDetailsRow(
-                      empData: "12",
-                      head: "Employee ID",
+                  child: Container(
+                    height: 40,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue.shade100),
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      dividerColor: Colors.transparent,
+                      indicator: BoxDecoration(
+                          color: splashBackgroundColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.black54,
+                      tabs: const [
+                        Tab(
+                          text: "User Info",
+                        ),
+                        Tab(
+                          text: "Company Info",
+                        ),
+                        Tab(
+                          text: "Salary Info",
+                        ),
+                      ],
                     ),
-                    const EmployeeDetailsRow(
-                      empData: "EMP1002",
-                      head: "Employee Company ID",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "nazbeer",
-                      head: "Username",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "Thomas Naz Weaver",
-                      head: "Full Name",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "Afghan",
-                      head: "Nationality",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "971524762486",
-                      head: "Mobile No",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "W549459",
-                      head: "Passport No",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "May 29, 2024",
-                      head: "Passport Expiration Date",
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 0.5,
-                      blurRadius: 2,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: tileBackgroundColor,
-                ),
-                child: Column(
+              SizedBox(
+                height: size.height * 0.7,
+                child: TabBarView(
                   children: [
-                    EmployeeTileHeading(
+                    MainContainer(
                       size: size,
-                      heading: "Employment Details",
+                      child: const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            TileHeading(
+                              text1: "Employee",
+                              text2: "Details",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "12",
+                              head: "Employee ID",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "EMP1002",
+                              head: "Employee Company ID",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "nazbeer",
+                              head: "Username",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "Thomas Naz Weaver",
+                              head: "Full Name",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "Afghan",
+                              head: "Nationality",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "971524762486",
+                              head: "Mobile No",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "W549459",
+                              head: "Passport No",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "May 29, 2024",
+                              head: "Passport Expiration Date",
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    const EmployeeDetailsRow(
-                      empData: "213123236778858",
-                      head: "Emirates ID",
+                    //asdasd
+                    MainContainer(
+                      size: size,
+                      child: const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            TileHeading(text1: "Employment", text2: "Details"),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "213123236778858",
+                              head: "Emirates ID",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "May 30, 2024",
+                              head: "ID Expiration Date",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "March 30, 2024",
+                              head: "Joining Date",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "staff 2",
+                              head: "Job Role",
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    const EmployeeDetailsRow(
-                      empData: "May 30, 2024",
-                      head: "ID Expiration Date",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "6899.00",
-                      head: "Basic Pay",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "1000.00",
-                      head: "House Allowance",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "0.00",
-                      head: "Transportation Allowance",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "5.00",
-                      head: "Commission Percentage",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "March 30, 2024",
-                      head: "Joining Date",
-                    ),
-                    const EmployeeDetailsRow(
-                      empData: "staff 2",
-                      head: "Job Role",
-                    ),
+                    //dasdads
+                    MainContainer(
+                      size: size,
+                      child: const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            TileHeading(text1: "Salary", text2: "Details"),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "6899.00",
+                              head: "Basic Pay",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "1000.00",
+                              head: "House Allowance",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "0.00",
+                              head: "Transportation Allowance",
+                            ),
+                            EmployeeDetailsRow(
+                              bordered: true,
+                              empData: "5.00",
+                              head: "Commission Percentage",
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
