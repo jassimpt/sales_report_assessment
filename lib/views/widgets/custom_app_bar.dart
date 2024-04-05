@@ -1,4 +1,7 @@
+import 'package:assessment/controllers/data_provider.dart';
+import 'package:assessment/views/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key, required this.size, required this.text});
@@ -46,7 +49,9 @@ class CustomAppBar extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        logOut(context);
+                      },
                       icon: const Icon(
                         Icons.logout,
                         color: Colors.black,
@@ -60,5 +65,15 @@ class CustomAppBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void logOut(BuildContext context) {
+    final pro = Provider.of<DataProvider>(context, listen: false);
+    pro.logout();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ));
   }
 }

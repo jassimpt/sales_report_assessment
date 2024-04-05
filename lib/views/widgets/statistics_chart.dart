@@ -30,9 +30,18 @@ class StatisticsChart extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
-            child: Text(
-              "Last 10 days Statistics",
-              style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+            child: Row(
+              children: [
+                Text(
+                  "Last 10 days ",
+                  style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Statistics",
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold, color: Colors.blue),
+                ),
+              ],
             ),
           ),
           SfCartesianChart(

@@ -1,6 +1,7 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/home_screen.dart';
+import 'package:assessment/views/widgets/bottom_nav.dart';
 import 'package:assessment/views/widgets/custom_button.dart';
 import 'package:assessment/views/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -145,7 +146,7 @@ class LoginScreen extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const BottomNav(),
           ),
         );
       }

@@ -15,8 +15,7 @@ class DashBoardScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize:
-            Size.fromHeight(size.height * 0.08), // Set your preferred height
+        preferredSize: Size.fromHeight(size.height * 0.08),
         child: CustomAppBar(
           size: size,
           text: "Dashboard",
@@ -47,7 +46,6 @@ class DashBoardScreen extends StatelessWidget {
                     ],
                   );
                 } else {
-                  print(snapshot.error);
                   return Center(
                     child: Text(snapshot.error.toString()),
                   );
