@@ -15,8 +15,7 @@ class ProfileScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(size.height * 0.08), // Set your preferred height
+          preferredSize: Size.fromHeight(size.height * 0.08),
           child: CustomAppBar(size: size, text: "Profile"),
         ),
         body: SingleChildScrollView(

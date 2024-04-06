@@ -56,7 +56,7 @@ class CustomDashboardTile extends StatelessWidget {
                 children: [
                   Text(
                     title1,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.openSans(
                         fontSize: 14,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
@@ -98,7 +98,7 @@ class CustomDashboardTile extends StatelessWidget {
               children: [
                 Text(
                   title2,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.openSans(
                       fontSize: 14,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),

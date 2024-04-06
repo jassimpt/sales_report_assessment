@@ -1,8 +1,10 @@
 import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/dashboard_screen.dart';
+import 'package:assessment/views/day_closing_report_screen.dart';
 import 'package:assessment/views/day_closing_screening.dart';
 import 'package:assessment/views/profile_screen.dart';
 import 'package:assessment/views/sales_products_and_services_screen.dart';
+import 'package:assessment/views/sales_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
@@ -26,7 +28,8 @@ class _BottomNavState extends State<BottomNav> {
     DashBoardScreen(),
     ProfileScreen(),
     DayClosingScreen(),
-    SalesProductsAndServicesScreen()
+    SalesProductsAndServicesScreen(),
+    DayClosingReportScren(),
   ];
 
   @override
@@ -66,6 +69,10 @@ class _BottomNavState extends State<BottomNav> {
                 GButton(
                   icon: Iconsax.shop,
                   text: "Sales",
+                ),
+                GButton(
+                  icon: Iconsax.receipt_discount,
+                  text: "Report",
                 ),
               ],
             ),

@@ -1,35 +1,56 @@
-import 'package:assessment/helpers/colors.dart';
+import 'package:assessment/controllers/data_controller.dart';
+import 'package:assessment/model/day_closing_report_model.dart';
+import 'package:assessment/model/sales_report_model.dart';
 import 'package:assessment/views/widgets/custom_app_bar.dart';
+import 'package:assessment/views/widgets/custom_submit_button.dart';
 import 'package:assessment/views/widgets/day_closing_data_head.dart';
 import 'package:assessment/views/widgets/employee_details_row.dart';
+import 'package:assessment/views/widgets/field_and_text_row.dart';
 import 'package:assessment/views/widgets/main_container.dart';
 import 'package:assessment/views/widgets/tile_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-class DayClosingScreen extends StatelessWidget {
+class DayClosingScreen extends StatefulWidget {
   DayClosingScreen({super.key});
 
-  TextEditingController dateController =
-      TextEditingController(text: "02-04-2024");
-  TextEditingController employeeController =
-      TextEditingController(text: "Thomas Naz Weaver");
-  TextEditingController totalServiceController =
-      TextEditingController(text: "0");
-  TextEditingController totalSalesController = TextEditingController(text: "0");
-  TextEditingController totalCollectionController =
-      TextEditingController(text: "0");
+  @override
+  State<DayClosingScreen> createState() => _DayClosingScreenState();
+}
+
+class _DayClosingScreenState extends State<DayClosingScreen> {
   TextEditingController advanceController = TextEditingController(text: "0");
-  TextEditingController netCollectionController =
-      TextEditingController(text: "0.00");
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<LocalDataController>(context, listen: false).fetchSalesReport();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final pro = Provider.of<LocalDataController>(context, listen: false);
+    final String date = DateFormat("dd-MM-yyyy").format(DateTime.now());
+    List<SalesReportModel> salesReports = pro.getSalesReportsByDate(date);
+    double totalSales = 0;
+    double totalServices = 0;
+    double totalCollection = 0;
+
+    for (var report in salesReports) {
+      totalSales += report.productTotal ?? 0;
+      totalServices += report.serviceTotal ?? 0;
+      totalCollection += report.totalAmount ?? 0;
+    }
+
+    double advance = double.tryParse(advanceController.text) ?? 0;
+    double netCollection = totalCollection - advance;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(size.height * 0.08), // Set your preferred height
+          preferredSize: Size.fromHeight(size.height * 0.08),
           child: CustomAppBar(size: size, text: "Day Closing")),
       body: SingleChildScrollView(
           child: MainContainer(
@@ -80,79 +101,70 @@ class DayClosingScreen extends StatelessWidget {
                       empData: "Thomas naz weaver",
                       head: "Employee",
                     ),
-                    const EmployeeDetailsRow(
+                    EmployeeDetailsRow(
                       bordered: false,
-                      empData: "0",
+                      empData: totalServices.toString(),
                       head: "Total Service",
                     ),
-                    const EmployeeDetailsRow(
+                    EmployeeDetailsRow(
                       bordered: false,
-                      empData: "0",
+                      empData: totalSales.toString(),
                       head: "Total Sales",
                     ),
-                    const EmployeeDetailsRow(
+                    EmployeeDetailsRow(
                       bordered: false,
-                      empData: "0",
+                      empData: totalCollection.toString(),
                       head: "Total Collection",
                     ),
-                    const EmployeeDetailsRow(
+                    EmployeeDetailsRow(
                       bordered: false,
-                      empData: "0",
+                      empData: netCollection.toString(),
                       head: "Net Collection",
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                      child: Row(
-                        children: [
-                          const DayClosingDataHead(text: "Advance:"),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                height: size.height * 0.06,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: "Advance",
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.withOpacity(0),
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    FieldAndTextRow(
+                      controller: advanceController,
+                      label: "advance",
+                      size: size,
+                      text: "Advance",
+                    )
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
-                child: SizedBox(
-                  width: size.width,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15))),
-                      backgroundColor:
-                          const MaterialStatePropertyAll(buttonColor1),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Submit",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
+              CustomSubmitButton(
+                size: size,
+                onPressed: () {
+                  addDayClosing(
+                    context,
+                    advance,
+                    netCollection,
+                    totalCollection,
+                    totalSales,
+                    totalServices,
+                  );
+                },
               )
             ],
           ),
         ),
       )),
     );
+  }
+
+  void addDayClosing(BuildContext context, advance, netCollection,
+      totalCollection, totalSales, totalServices) {
+    final pro = Provider.of<LocalDataController>(context, listen: false);
+    final date = DateFormat("dd-MM-yyyy").format(DateTime.now());
+
+    final DayClosingReportModel dayClosing = DayClosingReportModel(
+        advance: advance,
+        date: date,
+        employeeId: "12",
+        employeeName: "Thomas naz weaver",
+        netCollection: netCollection,
+        status: "Approved",
+        totalCollection: totalCollection,
+        totalSales: totalSales,
+        totalServices: totalServices);
+    pro.addDayClosing(dayClosing);
   }
 }

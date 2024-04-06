@@ -29,14 +29,14 @@ class EmployeeDetailsRow extends StatelessWidget {
                 "${head}: ",
                 style: const TextStyle(
                     color: basicFontColor,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
               Text(
                 empData,
                 style: const TextStyle(
                   color: basicFontColor,
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               )
             ],

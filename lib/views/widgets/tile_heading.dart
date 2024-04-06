@@ -16,11 +16,12 @@ class TileHeading extends StatelessWidget {
       children: [
         Text(
           "$text1 ",
-          style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
+          style:
+              GoogleFonts.openSans(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         Text(
           text2,
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.openSans(
               color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ],

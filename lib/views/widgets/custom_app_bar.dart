@@ -1,6 +1,7 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/views/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -44,7 +45,7 @@ class CustomAppBar extends StatelessWidget {
                       text,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

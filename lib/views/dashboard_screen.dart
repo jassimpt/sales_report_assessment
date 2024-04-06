@@ -1,13 +1,14 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/model/data_model.dart';
 import 'package:assessment/views/widgets/custom_app_bar.dart';
+import 'package:assessment/views/widgets/main_container.dart';
 import 'package:assessment/views/widgets/monthly_totals_widget.dart';
 import 'package:assessment/views/widgets/statistics_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatelessWidget {
-  const DashBoardScreen({super.key});
+  const DashBoardScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,7 @@ class DashBoardScreen extends StatelessWidget {
                         data: data,
                         size: size,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: StatisticsChart(data: data),
-                      ),
+                      StatisticsChart(data: data),
                     ],
                   );
                 } else {

@@ -4,7 +4,6 @@ import 'package:assessment/views/widgets/custom_dashboard_tile.dart';
 import 'package:assessment/views/widgets/main_container.dart';
 import 'package:assessment/views/widgets/tile_heading.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MonthlyTotalsWidget extends StatelessWidget {
   const MonthlyTotalsWidget(
