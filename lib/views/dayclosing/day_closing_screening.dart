@@ -60,10 +60,10 @@ class _DayClosingScreenState extends State<DayClosingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TileHeading(text1: "Day Closing by", text2: "Staff"),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
+              // const TileHeading(text1: "Day Closing by", text2: "Staff"),
+              // SizedBox(
+              //   height: size.height * 0.03,
+              // ),
               Row(
                 children: [
                   const DayClosingDataHead(text: "Date:"),

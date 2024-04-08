@@ -1,7 +1,9 @@
 import 'package:assessment/controllers/data_provider.dart';
-import 'package:assessment/views/login_screen.dart';
+import 'package:assessment/views/login/login_screen.dart';
+import 'package:assessment/views/sales/sales_products.dart';
+import 'package:assessment/views/sales/sales_report_screen.dart';
+import 'package:assessment/views/sales/sales_service.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -43,21 +45,55 @@ class CustomAppBar extends StatelessWidget {
                   children: [
                     Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        logOut(context);
+                    PopupMenuButton(
+                      itemBuilder: (context) => [
+                        const PopupMenuItem(
+                          child: Text("Sales by Products"),
+                          value: "sales by products",
+                        ),
+                        const PopupMenuItem(
+                          child: Text("Sales by Services"),
+                          value: "sales by services",
+                        ),
+                        const PopupMenuItem(
+                          child: Text("Sales Report"),
+                          value: "sales report",
+                        ),
+                        const PopupMenuItem(
+                          child: Text("Logout"),
+                          value: 'logout',
+                        ),
+                      ],
+                      onSelected: (value) {
+                        if (value == "logout") {
+                          logOut(context);
+                        } else if (value == "sales report") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SalesReportScreen(),
+                              ));
+                        } else if (value == "sales by products") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SalesProductsScreen(),
+                              ));
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SalesServiceScreen(),
+                              ));
+                        }
                       },
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),

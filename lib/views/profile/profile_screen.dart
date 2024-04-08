@@ -64,10 +64,10 @@ class ProfileScreen extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            TileHeading(
-                              text1: "Employee",
-                              text2: "Details",
-                            ),
+                            // TileHeading(
+                            //   text1: "Employee",
+                            //   text2: "Details",
+                            // ),
                             EmployeeDetailsRow(
                               bordered: true,
                               empData: "12",
@@ -119,7 +119,7 @@ class ProfileScreen extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            TileHeading(text1: "Employment", text2: "Details"),
+                            // TileHeading(text1: "Employment", text2: "Details"),
                             EmployeeDetailsRow(
                               bordered: true,
                               empData: "213123236778858",
@@ -151,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            TileHeading(text1: "Salary", text2: "Details"),
+                            // TileHeading(text1: "Salary", text2: "Details"),
                             EmployeeDetailsRow(
                               bordered: true,
                               empData: "6899.00",

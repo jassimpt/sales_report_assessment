@@ -1,36 +1,28 @@
 import 'package:assessment/controllers/basic_controller.dart';
-import 'package:assessment/controllers/data_controller.dart';
-import 'package:assessment/model/sales_report_model.dart';
-import 'package:assessment/views/sales_report_screen.dart';
-import 'package:assessment/views/widgets/custom_app_bar.dart';
+import 'package:assessment/helpers/colors.dart';
 import 'package:assessment/views/widgets/custom_submit_button.dart';
-import 'package:assessment/views/widgets/data_table.dart';
+import 'package:assessment/views/sales/widgets/data_table.dart';
+import 'package:assessment/views/widgets/day_closing_data_field.dart';
+import 'package:assessment/views/widgets/day_closing_data_head.dart';
 import 'package:assessment/views/widgets/employee_details_row.dart';
 import 'package:assessment/views/widgets/field_and_text_row.dart';
 import 'package:assessment/views/widgets/main_container.dart';
-import 'package:assessment/views/widgets/product_dialogue_box.dart';
-import 'package:assessment/views/widgets/tile_heading.dart';
+import 'package:assessment/views/sales/widgets/product_add_dialoguebox.dart';
 import 'package:flutter/material.dart';
-import 'package:assessment/views/widgets/day_closing_data_field.dart';
-import 'package:assessment/views/widgets/day_closing_data_head.dart';
-import 'package:assessment/helpers/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class SalesProductsAndServicesScreen extends StatelessWidget {
-  SalesProductsAndServicesScreen({super.key});
+class SalesProductsScreen extends StatelessWidget {
+  SalesProductsScreen({super.key});
 
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController qtyController = TextEditingController(text: "1");
   final TextEditingController amountController = TextEditingController();
-  final TextEditingController itemTotalController = TextEditingController();
+  final TextEditingController qtyController = TextEditingController(text: "1");
+  final TextEditingController dateController = TextEditingController();
   final TextEditingController discountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: splashBackgroundColor,
@@ -38,7 +30,7 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) {
-              return ProductDialogueBox(
+              return ProductAddDialogueBox(
                 amountController: amountController,
                 qtyController: qtyController,
               );
@@ -50,9 +42,11 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.08),
-        child: CustomAppBar(size: size, text: "Products & Services"),
+      appBar: AppBar(
+        title: Text(
+          "Sales by Staff - Products",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -62,25 +56,25 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Sales by ",
-                        style: GoogleFonts.openSans(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Staff",
-                        style: GoogleFonts.openSans(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  const TileHeading(text1: "Products & ", text2: "Services"),
+                  // SizedBox(
+                  //   height: size.height * 0.02,
+                  // ),
+                  // Center(
+                  //   child: Text(
+                  //     "Sales by Staff",
+                  //     style: GoogleFonts.openSans(
+                  //         fontSize: 20, fontWeight: FontWeight.bold),
+                  //   ),
+                  // ),
+                  // Center(
+                  //   child: Text(
+                  //     "Products",
+                  //     style: GoogleFonts.openSans(
+                  //         fontSize: 20,
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.blue),
+                  //   ),
+                  // ),
                   Row(
                     children: [
                       const DayClosingDataHead(text: "Date:"),
@@ -114,21 +108,6 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Added Services",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Consumer<BasicController>(
-                      builder: (context, pro, child) =>
-                          DataTableWidget(productsList: pro.serviceList),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -144,18 +123,8 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
                   children: [
                     EmployeeDetailsRow(
                       bordered: false,
-                      empData: totals["productTotal"].toString(),
-                      head: "Item Total",
-                    ),
-                    EmployeeDetailsRow(
-                      bordered: false,
                       empData: totals["subTotal"].toString(),
                       head: "Sub Total",
-                    ),
-                    EmployeeDetailsRow(
-                      bordered: false,
-                      empData: totals["serviceTotal"].toString(),
-                      head: "Service Total",
                     ),
                     FieldAndTextRow(
                       controller: discountController,
@@ -205,37 +174,8 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                      child: CustomSubmitButton(
-                          size: size,
-                          onPressed: () {
-                            addSalesReport(context);
-                          }),
+                      child: CustomSubmitButton(size: size, onPressed: () {}),
                     ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                      child: SizedBox(
-                        width: size.width,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15))),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.blue)),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SalesReportScreen(),
-                                  ));
-                            },
-                            child: Text(
-                              "Sales Report",
-                              style: TextStyle(color: Colors.white),
-                            )),
-                      ),
-                    )
                   ],
                 );
               }),
@@ -244,27 +184,5 @@ class SalesProductsAndServicesScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void addSalesReport(BuildContext context) {
-    final pro = Provider.of<LocalDataController>(context, listen: false);
-    final pros = Provider.of<BasicController>(context, listen: false);
-    final double discount = double.tryParse(discountController.text) ?? 0;
-    Map<String, double> totals =
-        pros.calculateTotals(pros.productsList, pros.serviceList, discount);
-    final date = DateFormat("dd-MM-yyyy").format(DateTime.now());
-    final SalesReportModel salesReport = SalesReportModel(
-      date: date,
-      discount: discount,
-      employeeId: "12",
-      employeeName: "Thomas Naz Weaver",
-      paymentMethod: pros.selectedPaymentMethod,
-      productTotal: totals["productTotal"],
-      serviceTotal: totals["serviceTotal"],
-      subTotal: totals["subTotal"],
-      totalAmount: totals["totalAmount"],
-    );
-    pro.addSalesReport(salesReport);
-    pro.salesReportList.length;
   }
 }

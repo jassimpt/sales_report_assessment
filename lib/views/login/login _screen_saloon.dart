@@ -1,6 +1,6 @@
 import 'package:assessment/helpers/colors.dart';
-import 'package:assessment/views/widgets/custom_button.dart';
-import 'package:assessment/views/widgets/custom_textfield.dart';
+import 'package:assessment/views/login/widgets/custom_button.dart';
+import 'package:assessment/views/login/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

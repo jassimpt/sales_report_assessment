@@ -1,9 +1,8 @@
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/model/data_model.dart';
 import 'package:assessment/views/widgets/custom_app_bar.dart';
-import 'package:assessment/views/widgets/main_container.dart';
-import 'package:assessment/views/widgets/monthly_totals_widget.dart';
-import 'package:assessment/views/widgets/statistics_chart.dart';
+import 'package:assessment/views/dashboard/widgets/monthly_totals_widget.dart';
+import 'package:assessment/views/dashboard/widgets/statistics_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

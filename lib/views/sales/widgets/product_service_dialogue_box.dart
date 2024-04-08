@@ -1,12 +1,12 @@
 import 'package:assessment/controllers/basic_controller.dart';
 import 'package:assessment/model/product_model.dart';
 import 'package:assessment/model/product_sales_model.dart';
-import 'package:assessment/views/widgets/product_add_tab.dart';
+import 'package:assessment/views/sales/widgets/product_add_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProductDialogueBox extends StatelessWidget {
-  ProductDialogueBox({
+class ProductandServiceDialogueBox extends StatelessWidget {
+  ProductandServiceDialogueBox({
     super.key,
     required this.amountController,
     required this.qtyController,
@@ -96,6 +96,7 @@ class ProductDialogueBox extends StatelessWidget {
     amountController.clear();
     pro.selectedServiceParticular = "";
     qtyController.clear();
+
     Navigator.pop(context);
   }
 }

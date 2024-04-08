@@ -3,7 +3,7 @@ import 'package:assessment/controllers/data_controller.dart';
 import 'package:assessment/controllers/data_provider.dart';
 import 'package:assessment/model/day_closing_report_model.dart';
 import 'package:assessment/model/sales_report_model.dart';
-import 'package:assessment/views/splash_screen.dart';
+import 'package:assessment/views/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';

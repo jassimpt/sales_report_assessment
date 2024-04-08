@@ -1,10 +1,10 @@
 import 'package:assessment/helpers/colors.dart';
-import 'package:assessment/views/dashboard_screen.dart';
-import 'package:assessment/views/day_closing_report_screen.dart';
-import 'package:assessment/views/day_closing_screening.dart';
-import 'package:assessment/views/profile_screen.dart';
-import 'package:assessment/views/sales_products_and_services_screen.dart';
-import 'package:assessment/views/sales_report_screen.dart';
+import 'package:assessment/views/dashboard/dashboard_screen.dart';
+import 'package:assessment/views/dayclosing/day_closing_report_screen.dart';
+import 'package:assessment/views/dayclosing/day_closing_screening.dart';
+import 'package:assessment/views/profile/profile_screen.dart';
+import 'package:assessment/views/sales/sales_products_and_services_screen.dart';
+import 'package:assessment/views/sales/sales_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
